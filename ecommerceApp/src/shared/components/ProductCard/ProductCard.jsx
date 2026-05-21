@@ -1,38 +1,106 @@
-import { FiHeart } from 'react-icons/fi';
-import styles from './ProductCard.module.css';
+import React from "react";
+import styles from "./ProductCard.module.css";
 
-export default function ProductCard({ product }) {
-  // Səhifə qırılmasın deyə default dummy data təyin edirik
-  const item = product || {
-    brand: "Trendyol Collection",
-    title: "Oversize Örme Antrasit Bisiklet Yaka Tişört %100 Pamuklu Premium",
-    price: 279.99,
-    oldPrice: 429.99,
-    image: "https://picsum.photos/id/24/300/400"
-  };
+const ProductCard = ({ product }) => {
+  const {
+    title,
+    brand,
+    price,
+    discountPercentage = 0,
+    rating,
+    thumbnail,
+  } = product;
+
+  // Əgər API-dən gələn price son qiymətdirsə və discountPercentage varsa,
+  // köhnə qiyməti (üstündən xətt çəkilmiş) hesablaya bilərik:
+  const originalPrice = discountPercentage
+    ? (price / (1 - discountPercentage / 100)).toFixed(2)
+    : price;
 
   return (
     <div className={styles.card}>
-      <div className={styles.imageSection}>
-        <img src={item.image} alt={item.title} />
-        <button className={styles.favButton}>
-          <FiHeart size={18} />
-        </button>
+      {/* Sevimlilərə əlavə et düyməsi */}
+      <button className={styles.favoriteBtn}>
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
+      </button>
+
+      {/* Məhsul Şəkli */}
+      <div className={styles.imageContainer}>
+        <img src={thumbnail} alt={title} className={styles.image} />
       </div>
 
-      <div className={styles.infoSection}>
-        <div>
-          <span className={styles.brand}>{item.brand}</span>{' '}
-          <span className={styles.title}>{item.title}</span>
+      {/* Məhsul Məlumatları */}
+      <div className={styles.details}>
+        <h3 className={styles.title}>
+          {brand && <span className={styles.brand}>{brand} </span>}
+          {title}
+        </h3>
+
+        {/* Reytinq hissəsi */}
+        <div className={styles.ratingRow}>
+          <span className={styles.ratingScore}>{rating}</span>
+          <div className={styles.stars}>
+            {/* 5 ulduz simulyasiyası */}
+            {[1, 2, 3, 4, 5].map((star) => (
+              <span
+                key={star}
+                className={
+                  star <= Math.round(rating)
+                    ? styles.starFilled
+                    : styles.starEmpty
+                }
+              >
+                ★
+              </span>
+            ))}
+          </div>
+          <span className={styles.reviewCount}>(26) 📷</span>
         </div>
-        
+
+        <div className={styles.extraTag}>
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={styles.tagIcon}
+          >
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          əlavə endirim
+        </div>
+
+        {/* Qiymət hissəsi */}
         <div className={styles.priceContainer}>
-          {item.oldPrice && <span className={styles.oldPrice}>{item.oldPrice} TL</span>}
-          <span className={styles.currentPrice}>{item.price} TL</span>
+          {discountPercentage > 0 && (
+            <div className={styles.discountBadge}>
+              -{Math.round(discountPercentage)}%
+            </div>
+          )}
+          <div className={styles.currentPrice}>{price} ₼</div>
+          {discountPercentage > 0 && (
+            <div className={styles.originalPrice}>{originalPrice} ₼</div>
+          )}
         </div>
       </div>
-
-      <button className={styles.addButton}>Sepete Ekle</button>
     </div>
   );
-}
+};
+
+export default ProductCard;

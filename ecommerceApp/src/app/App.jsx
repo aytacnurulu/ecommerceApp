@@ -17,14 +17,12 @@
 // import AppRoutes from "./routes/index";
 import { BrowserRouter } from "react-router-dom";
 import  ProductProvider  from "../context/ProductContext";
-import CategoryList from "../features/home/components/CategoryList";
 import AppRoutes from "./routes/index";
 export default function App() {
   return (
     <BrowserRouter>
       <ProductProvider>
         <AppRoutes />
-        <CategoryList />
       </ProductProvider>
     </BrowserRouter>
   );

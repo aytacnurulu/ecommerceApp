@@ -1,29 +1,33 @@
-.homeWrapper {
-  width: 100%;
-}
-
-.sectionTitle {
-  font-size: 20px;
-  font-bold: 700;
-  margin-bottom: 20px;
-  padding-left: 10px;
-  border-left: 4px solid #f27a1a;
-  color: #333;
-}
-
+/* Əsas Grid Strukturu - Standart olaraq mobil ekranlardan başlayır */
 .productGrid {
   display: grid;
-  grid-template-cols: repeat(1, minmax(0, 1fr));
-  gap: 20px;
+  /* Mobildə hər sətirdə 1 kart tam genişlikdə görünsün */
+  grid-template-columns: repeat(1, 1fr);
+  gap: 24px;
+  width: 100%;
+  justify-items: center;
 }
 
-/* Ekran böyüdükcə sütun sayını tənzimləyirik (Responsive CSS Grid) */
-@media (min-width: 640px) {
-  .productGrid { grid-template-cols: repeat(2, minmax(0, 1fr)); }
+/* Planşet ekranlar üçün (Genişlik 600px-dən böyük olduqda) */
+@media (min-width: 600px) {
+  .productGrid {
+    /* Yan-yana 2 kart düzülsün */
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
-@media (min-width: 768px) {
-  .productGrid { grid-template-cols: repeat(3, minmax(0, 1fr)); }
+
+/* Kiçik monitorlar/Notebooklar üçün (Genişlik 900px-dən böyük olduqda) */
+@media (min-width: 900px) {
+  .productGrid {
+    /* Yan-yana 3 kart düzülsün */
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
-@media (min-width: 1024px) {
-  .productGrid { grid-template-cols: repeat(4, minmax(0, 1fr)); }
+
+/* Böyük ekranlar üçün (Genişlik 1200px-dən böyük olduqda) */
+@media (min-width: 1200px) {
+  .productGrid {
+    /* Tam istədiyiniz kimi: dəqiq yan-yana 4 kart düzülsün */
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
