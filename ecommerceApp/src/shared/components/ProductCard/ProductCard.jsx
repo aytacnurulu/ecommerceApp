@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./ProductCard.module.css";
-
+import { useNavigate } from "react-router-dom";
 const ProductCard = ({ product }) => {
+  const navigate = useNavigate();
   const {
     title,
     brand,
@@ -18,7 +19,10 @@ const ProductCard = ({ product }) => {
     : price;
 
   return (
-    <div className={styles.card}>
+    <div
+      className={styles.card}
+      onClick={() => navigate(`/product/${product.id}`)}
+    >
       {/* Sevimlilərə əlavə et düyməsi */}
       <button className={styles.favoriteBtn}>
         <svg
