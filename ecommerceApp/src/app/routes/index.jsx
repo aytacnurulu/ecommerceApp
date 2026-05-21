@@ -1,6 +1,6 @@
 import ProtectedRoute from "../routes/protected/index";
 import AuthRouter from "../routes/auth/index";
-import MainLayout from "../../shared/layouts/MainLayout";
+import MainLayout from "../../shared/layout/MainLayout";
 function AppRoutes() {
   const authenticated = true;
 

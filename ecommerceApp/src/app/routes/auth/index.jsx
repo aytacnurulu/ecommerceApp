@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 
-import ForgetPassword from "../../../feature/auth/ForgetPassword";
-import SignIn from "../../../feature/auth/SignIn";
-import SignUp from "../../../feature/auth/SignUp";
+import ForgetPassword from "../../../features/auth/components/ForgetPassword";
+import SignIn from "../../../features/auth/components/SignIn";
+import SignUp from "../../../features/auth/components/SignUp";
 import NotFound from "../../../shared/components/NotFound";
 
 function AuthRouter() {
