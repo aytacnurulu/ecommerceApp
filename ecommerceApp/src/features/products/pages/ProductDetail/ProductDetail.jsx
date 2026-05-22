@@ -31,15 +31,29 @@ function getStatusInfo(status) {
 
 export default function ProductDetail() {
   const { id } = useParams();
-  const { products } = useContext(ProductsContext);
-  const product = products.find((p) => p.id === parseInt(id));
+  const { products, favorites, toggleFavorite, cartItems, addToCart } =
+    useContext(ProductsContext);
 
   const [imgIdx, setImgIdx] = useState(0);
   const [qty, setQty] = useState(1);
-  const [wishlist, setWishlist] = useState(false);
-  const [added, setAdded] = useState(false);
-  const [showToast, setShowToast] = useState(false);
 
+  const [showToast, setShowToast] = useState(false);
+  const product = products.find((p) => p.id === parseInt(id));
+  const isFavorite = favorites.some((item) => item.id === product?.id);
+  const inCart = cartItems.some((item) => item.id === product?.id);
+
+  const handleFavorite = (e) => {
+    e.stopPropagation();
+    toggleFavorite(product);
+  };
+  const handleAddToCart = () => {
+    if (isOOS) return;
+    addToCart(product);
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+    }, 2500);
+  };
   if (!product) {
     return (
       <div className="pd-root" style={{ textAlign: "center", paddingTop: 80 }}>
@@ -60,16 +74,6 @@ export default function ProductDetail() {
   ).toFixed(2);
   const statusInfo = getStatusInfo(product.availabilityStatus);
   const isOOS = product.availabilityStatus === "Out of Stock";
-
-  const handleAddToCart = () => {
-    if (isOOS) return;
-    setAdded(true);
-    setShowToast(true);
-    setTimeout(() => {
-      setAdded(false);
-      setShowToast(false);
-    }, 2500);
-  };
 
   const infoCards = [
     {
@@ -249,22 +253,33 @@ export default function ProductDetail() {
             {/* CTAs */}
             <div className="pd-cta-row">
               <button
-                className={`pd-btn-cart${added ? " added" : ""}`}
+                className={`pd-btn-cart${inCart ? " added" : ""}`}
                 onClick={handleAddToCart}
                 disabled={isOOS}
               >
-                {added
-                  ? "✓ Added to Cart!"
+                {inCart
+                  ? "✓ In Cart"
                   : isOOS
                     ? "Out of Stock"
                     : "🛒 Add to Cart"}
               </button>
               <button
-                className={`pd-btn-wishlist${wishlist ? " active" : ""}`}
-                onClick={() => setWishlist((w) => !w)}
-                title={wishlist ? "Remove from wishlist" : "Add to wishlist"}
+                className={`pd-btn-wishlist${isFavorite ? " active" : ""}`}
+                onClick={handleFavorite}
+                title={isFavorite ? "Remove from wishlist" : "Add to wishlist"}
               >
-                {wishlist ? "♥" : "♡"}
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill={isFavorite ? "red" : "none"}
+                  stroke={isFavorite ? "red" : "currentColor"}
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
               </button>
             </div>
 

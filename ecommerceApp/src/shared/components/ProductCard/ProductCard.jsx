@@ -1,6 +1,7 @@
-import React from "react";
 import styles from "./ProductCard.module.css";
 import { useNavigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { ProductsContext } from "../../../context/ProductContext";
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
   const {
@@ -12,11 +13,18 @@ const ProductCard = ({ product }) => {
     thumbnail,
   } = product;
 
-  // Əgər API-dən gələn price son qiymətdirsə və discountPercentage varsa,
-  // köhnə qiyməti (üstündən xətt çəkilmiş) hesablaya bilərik:
+  const { favorites, toggleFavorite } = useContext(ProductsContext);
+
+  const isFavorite = favorites.some((item) => item.id === product.id);
   const originalPrice = discountPercentage
     ? (price / (1 - discountPercentage / 100)).toFixed(2)
     : price;
+
+  const addToFavorites = (e) => {
+    e.stopPropagation();
+
+    toggleFavorite(product);
+  };
 
   return (
     <div
@@ -24,13 +32,13 @@ const ProductCard = ({ product }) => {
       onClick={() => navigate(`/product/${product.id}`)}
     >
       {/* Sevimlilərə əlavə et düyməsi */}
-      <button className={styles.favoriteBtn}>
+      <button className={styles.favoriteBtn} onClick={addToFavorites}>
         <svg
           width="24"
           height="24"
           viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
+          fill={isFavorite ? "red" : "none"}
+          stroke={isFavorite ? "red" : "currentColor"}
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"

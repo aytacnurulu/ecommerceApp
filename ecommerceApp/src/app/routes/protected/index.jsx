@@ -30,19 +30,19 @@ const ProfileLayout = () => (
   <div className="flex flex-col md:flex-row gap-6 p-6 bg-white rounded shadow">
     <div className="w-full md:w-1/4 border-r pr-4 flex flex-col gap-3 font-semibold text-gray-700">
       <div className="text-sm text-gray-400 uppercase tracking-wider mb-2">
-        Hesabım
+        Account
       </div>
       <a
         href="/profile/orders"
         className="hover:text-trendyol-orange transition-colors"
       >
-        Siparişlerim
+        Orders
       </a>
       <a
         href="/profile/addresses"
         className="hover:text-trendyol-orange transition-colors"
       >
-        Adres Bilgilerim
+        Addresses
       </a>
     </div>
     <div className="flex-1">

@@ -5,10 +5,11 @@ import {
   FiUser,
 } from "react-icons/fi";
 import styles from "./Header.module.css";
-
+import {useNavigate} from "react-router-dom";
 export default function Header() {
   const favoriteCount = 2;
   const cartCount = 3;
+  const navigate = useNavigate();
 
   return (
     <header className={styles.headerWrapper}>
@@ -33,14 +34,14 @@ export default function Header() {
         {/* Right Side */}
         <div className={styles.actions}>
           
-          <div className={styles.actionButton}>
+          <div className={styles.actionButton} onClick={() => navigate("/profile")}>
             <FiUser />
-            <span>Hesabım</span>
+            <span>Account</span>
           </div>
 
-          <div className={styles.actionButton}>
+          <div className={styles.actionButton} onClick={() => navigate("/favorites")}>
             <FiHeart />
-            <span>Sevimlilərim</span>
+            <span>Favorites</span>
 
             {favoriteCount > 0 && (
               <span className={styles.badge}>
@@ -49,9 +50,9 @@ export default function Header() {
             )}
           </div>
 
-          <div className={styles.actionButton}>
+          <div className={styles.actionButton} onClick={() => navigate("/cart")}>
             <FiShoppingCart />
-            <span>Səbətim</span>
+            <span>Cart</span>
 
             {cartCount > 0 && (
               <span className={styles.badge}>
