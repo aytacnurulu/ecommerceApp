@@ -1,4 +1,72 @@
-.categoryContainer {
+/* src/shared/components/CategoryBar/CategoryBar.module.css */
+.bar {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  padding: 0 12px;
+  background: #fff;
+  border-bottom: 1px solid #efefef;
+  overflow-x: auto;
+  scrollbar-width: none;
+  white-space: nowrap;
+
+  /* Sticks right below header — adjust 64px to your Header height */
+  position: sticky;
+  top: 64px;
+  z-index: 90;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+.bar::-webkit-scrollbar {
+  display: none;
+}
+
+.item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 10px 16px 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s;
+  border-radius: 0;
+}
+.item:hover {
+  background: #fafafa;
+}
+
+.active {
+  color: #ff6b35;
+}
+
+.emoji {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: capitalize;
+  color: inherit;
+  letter-spacing: 0.01em;
+}
+
+/* Animated bottom line */
+.underline {
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  width: 80%;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+} 
+
+/* .categoryContainer {
   display: flex;
   align-items: center;
   gap: 30px;
@@ -127,4 +195,4 @@
   background: #f57224;
 
   border-radius: 10px;
-}
+} */

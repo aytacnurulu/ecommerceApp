@@ -1,0 +1,169 @@
+/* src/features/profile/pages/Addresses.module.css */
+.root { display: flex; flex-direction: column; gap: 20px; }
+
+.pageHeader { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.title { font-size: 20px; font-weight: 700; color: #1a1a2e; margin: 0; }
+
+.addBtn {
+  padding: 9px 18px;
+  background: #ff6b35;
+  color: #fff;
+  border: none;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.addBtn:hover { opacity: 0.85; }
+
+/* ── Form ── */
+.formCard {
+  background: #fff;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+}
+.formTitle { font-size: 16px; font-weight: 700; color: #1a1a2e; margin: 0 0 16px; }
+
+.labelPicker { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+.labelBtn {
+  padding: 8px 18px;
+  border: 2px solid #eee;
+  border-radius: 8px;
+  background: #fafafa;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.labelBtnActive {
+  border-color: #ff6b35;
+  background: #fff4ec;
+  color: #ff6b35;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+@media (max-width: 540px) { .formGrid { grid-template-columns: 1fr; } }
+
+.formGroup { display: flex; flex-direction: column; gap: 5px; }
+.formLabel { font-size: 12px; font-weight: 600; color: #666; }
+.formInput {
+  padding: 10px 12px;
+  border: 1.5px solid #e8e8e8;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #222;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.formInput:focus { border-color: #ff6b35; }
+.inputError { border-color: #ef4444 !important; }
+.errorMsg { font-size: 11px; color: #ef4444; }
+
+.formActions { display: flex; gap: 10px; margin-top: 20px; }
+.saveBtn {
+  padding: 10px 24px;
+  background: #ff6b35;
+  color: #fff;
+  border: none;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.saveBtn:hover { opacity: 0.85; }
+.cancelBtn {
+  padding: 10px 20px;
+  background: #f0f0f0;
+  color: #555;
+  border: none;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.cancelBtn:hover { background: #e5e5e5; }
+
+/* ── Cards grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border: 2px solid transparent;
+  position: relative;
+  transition: box-shadow 0.2s;
+}
+.card:hover   { box-shadow: 0 4px 16px rgba(0, 0, 0, 0.09); }
+.cardDefault  { border-color: #ff6b35; }
+
+.defaultBadge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: #fff4ec;
+  color: #ff6b35;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.labelTag {
+  font-size: 13px;
+  font-weight: 700;
+  color: #333;
+}
+.cardActions { display: flex; gap: 8px; }
+.editBtn, .deleteBtn {
+  padding: 4px 12px;
+  border-radius: 7px;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.editBtn   { background: #f0f0f0; color: #333; }
+.deleteBtn { background: #fef2f2; color: #dc2626; }
+.editBtn:hover   { background: #e5e5e5; }
+.deleteBtn:hover { background: #fee2e2; }
+
+.name    { font-size: 14px; font-weight: 700; color: #1a1a2e; margin-bottom: 3px; }
+.phone   { font-size: 13px; color: #666; margin-bottom: 6px; }
+.line    { font-size: 13px; color: #888; line-height: 1.5; }
+
+.setDefaultBtn {
+  margin-top: 14px;
+  width: 100%;
+  padding: 8px;
+  background: transparent;
+  border: 1.5px dashed #ff6b35;
+  color: #ff6b35;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.setDefaultBtn:hover { background: #fff4ec; }
+
+.empty { text-align: center; padding: 48px; color: #bbb; }
+.emptyIcon { font-size: 44px; margin-bottom: 10px; }
