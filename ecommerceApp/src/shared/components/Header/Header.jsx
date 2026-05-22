@@ -4,6 +4,7 @@ import { FiSearch, FiHeart, FiShoppingCart, FiUser } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { ProductsContext } from "../../../context/ProductContext";
 import styles from "./Header.module.css";
+import LiveSearchBar from "./LiveSearchBar";
 
 export default function Header() {
   const { favorites, cartItems } = useContext(ProductsContext);
@@ -17,7 +18,7 @@ export default function Header() {
           Trendyol
         </div>
 
-        {/* Search */}
+        {/* Search
         <div className={styles.searchContainer}>
           <input
             type="text"
@@ -25,8 +26,9 @@ export default function Header() {
             className={styles.searchInput}
           />
           <FiSearch className={styles.searchIcon} />
-        </div>
+        </div> */}
 
+        <LiveSearchBar />
         {/* Actions */}
         <div className={styles.actions}>
           <div
